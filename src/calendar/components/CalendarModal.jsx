@@ -1,0 +1,122 @@
+import { useMemo } from 'react'
+import Modal from 'react-modal'
+
+import DatePicker, { registerLocale } from 'react-datepicker'
+import es from 'date-fns/locale/es';
+
+import { useModalForm } from '../hooks/useModalForm';
+
+import 'react-datepicker/dist/react-datepicker.css'
+import 'sweetalert2/dist/sweetalert2.min.css'
+
+registerLocale('es', es) // react-datepicker utiliza la biblioteca date-fns para el manejo y formato de fechas, y registerLocale se utiliza para registrar localizaciones adicionales proporcionadas por date-fns/locale.
+
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+};
+
+Modal.setAppElement('#root'); //  el método setAppElement se utiliza para establecer el elemento raíz de la aplicación que será ocultado a los lectores de pantalla cuando el modal esté abierto
+
+export const CalendarModal = () => {
+
+    const {
+        isOpen,
+        formSubmitted,
+        formValues,
+        onCloseModal,
+        onInputChange,
+        onDateChange,
+        onSubmit
+    } = useModalForm() // custom hook
+
+    const titleClass = useMemo(() => {
+        if ( !formSubmitted ) return ''
+
+        return ( formValues.title.length > 0 ) ? '' : 'is-invalid'
+    }, [formValues.title, formSubmitted])
+
+    return (
+        <Modal
+            isOpen={ isOpen }
+            onRequestClose={ onCloseModal }
+            style={ customStyles }
+            className="modal"
+            overlayClassName="modal-fondo"
+            closeTimeoutMS={ 200 }
+        >
+            <h1> Nuevo evento </h1>
+            <hr />
+            <form className="container" onSubmit={ onSubmit }>
+                <div className="form-group mb-2">
+                    <label>Fecha y hora inicio</label>
+                    <DatePicker 
+                        selected={ formValues.start }
+                        onChange={ (event) => onDateChange(event, 'start') } //  el componente DatePicker no tiene un evento directo llamado onChange. en su lugar, utiliza el evento onChange estándar de React en combinación con la propiedad selected para capturar cambios en la selección de fecha.
+                        className='form-control'
+                        dateFormat="Pp" // hora, minuto y segundo
+                        showTimeSelect // muestra para seleccionar hora
+                        locale="es" // configuramos idioma
+                        timeCaption='Hora'
+                    />
+                </div>
+
+                <div className="form-group mb-2">
+                    <label>Fecha y hora fin</label>
+                    <DatePicker 
+                        minDate={ formValues.start } // no podría seleccionar una fecha que este antes de la fecha de inicio
+                        selected={ formValues.end }
+                        onChange={ (event) => onDateChange(event, 'end') } 
+                        className='form-control'
+                        dateFormat="Pp" // hora, minuto y segundo
+                        showTimeSelect // muestra para seleccionar hora
+                        locale="es" // configuramos idioma
+                        timeCaption='Hora'
+                    />
+                </div>
+
+                <hr />
+                <div className="form-group mb-2">
+                    <label>Titulo y notas</label>
+                    <input 
+                        type="text" 
+                        className={`form-control ${ titleClass }`}
+                        placeholder="Título del evento"
+                        autoComplete="off"
+                        name="title"
+                        value={ formValues.title }
+                        onChange={onInputChange}
+                    />
+                    <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
+                </div>
+
+                <div className="form-group mb-2">
+                    <textarea 
+                        type="text" 
+                        className="form-control"
+                        placeholder="Notas"
+                        rows="5"
+                        name="notes"
+                        value={ formValues.notes }
+                        onChange={onInputChange}
+                    />
+                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                </div>
+
+                <button
+                    type="submit"
+                    className="btn btn-outline-primary btn-block"
+                >
+                    <i className="far fa-save"></i>
+                    <span> Guardar</span>
+                </button>
+            </form>
+        </Modal>
+    )
+}
