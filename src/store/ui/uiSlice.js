@@ -11,7 +11,7 @@ export const uiSlice = createSlice({
         onOpenDateModal: (state, action ) => { // Esto se va a llamar cuando el usuario abra el Modal 
             state.isDateModalOpen = true
         },
-        onCloseDateModal: (state, action ) => { // Esto se va a llamar cuando el usuario abra el Modal 
+        onCloseDateModal: (state, action ) => { // Esto se va a llamar cuando el usuario cierre el Modal 
             state.isDateModalOpen = false
         },
     }

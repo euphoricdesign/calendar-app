@@ -3,25 +3,19 @@ import { useState } from 'react'
 import { Calendar } from 'react-big-calendar' 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import { addHours } from 'date-fns' 
-import { CalendarEvent, CalendarModal, Navbar } from "../" // componentes
+import { CalendarEvent, CalendarModal, FabAddNew, Navbar } from "../" // componentes
 
 import { localizer, getMessagesES } from '../../helpers' // helpers
+import { useUiStore } from '../../hooks/useUiStore'
+import { useCalendarStore } from '../../hooks/useCalendarStore'
 
 
-const events = [{ // array de eventos
-    title: 'Cumpleaños del jefe',
-    notes: 'Hay que comprar un pastel',
-    start: new Date(),
-    end: addHours( new Date(), 2 ),
-    bgColor: '#fafafa',
-    user: {
-        _id: '123',
-        name: 'Merlina'
-    }
-}]
+
 
 export const CalendarPage = () => {
+
+    const { openDateModal } = useUiStore()
+    const { events, onChangeActiveEvent } = useCalendarStore()
 
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week' )
 
@@ -41,15 +35,17 @@ export const CalendarPage = () => {
 
     // Crearemos 3 eventos/funciones que conectaremos cuando algo suceda en nuestro calendario
     const onDoubleClick = ( event ) => {
-        console.log( { doubleClick: event } );
+        openDateModal()
+        
     }
 
     const onSelect = ( event ) => {
-        console.log( { selectClick: event } );
+        // console.log( { selectClick: event } );
+        onChangeActiveEvent( event )
     }
 
     const onViewChanged = ( event ) => {
-        localStorage.setItem('lastView', event)
+        // localStorage.setItem('lastView', event)
     }
 
 
@@ -63,7 +59,7 @@ export const CalendarPage = () => {
                 events={ events }
                 defaultView={ lastView }
                 startAccessor="start"
-                endAccessor="end"
+                endAccessor="end" // se utilizan para especificar los nombres de la propiedades en los objetos de eventos que representan la fecha de inicio y fin del evento.
                 style={{ height: 'calc( 100vh - 80px )' }}
                 messages={ getMessagesES() } // esto nos configura en español el resto del calendario (botones, mensajes)
                 eventPropGetter={ eventStyleGetter } // eventPropGetter es una función opcional que se utiliza para personalizar la apariencia y el estilo de los eventos en el calendario
@@ -77,6 +73,7 @@ export const CalendarPage = () => {
             />
 
             <CalendarModal />
+            <FabAddNew />
         </>
     )
 }

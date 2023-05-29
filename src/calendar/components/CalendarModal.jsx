@@ -8,6 +8,7 @@ import { useModalForm } from '../hooks/useModalForm';
 
 import 'react-datepicker/dist/react-datepicker.css'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import { useUiStore } from '../../hooks/useUiStore';
 
 registerLocale('es', es) // react-datepicker utiliza la biblioteca date-fns para el manejo y formato de fechas, y registerLocale se utiliza para registrar localizaciones adicionales proporcionadas por date-fns/locale.
 
@@ -26,8 +27,9 @@ Modal.setAppElement('#root'); //  el método setAppElement se utiliza para estab
 
 export const CalendarModal = () => {
 
+    const { isDateModalOpen } = useUiStore() // custom hook que consume de mi store, en lugar de usar acá el useSelector 
+
     const {
-        isOpen,
         formSubmitted,
         formValues,
         onCloseModal,
@@ -44,11 +46,11 @@ export const CalendarModal = () => {
 
     return (
         <Modal
-            isOpen={ isOpen }
+            isOpen={ isDateModalOpen }
             onRequestClose={ onCloseModal }
             style={ customStyles }
             className="modal"
-            overlayClassName="modal-fondo"
+            overlayClassName="modal-fondo" // . La superposición es la capa oscura y transparente que se muestra detrás del componente Modal para enfocar la atención del usuario en el contenido del modal.
             closeTimeoutMS={ 200 }
         >
             <h1> Nuevo evento </h1>
@@ -57,7 +59,7 @@ export const CalendarModal = () => {
                 <div className="form-group mb-2">
                     <label>Fecha y hora inicio</label>
                     <DatePicker 
-                        selected={ formValues.start }
+                        selected={ formValues.start } // la fecha seleccionada
                         onChange={ (event) => onDateChange(event, 'start') } //  el componente DatePicker no tiene un evento directo llamado onChange. en su lugar, utiliza el evento onChange estándar de React en combinación con la propiedad selected para capturar cambios en la selección de fecha.
                         className='form-control'
                         dateFormat="Pp" // hora, minuto y segundo

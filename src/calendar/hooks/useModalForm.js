@@ -1,27 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 import { addHours, differenceInSeconds } from 'date-fns'
+import { useUiStore } from '../../hooks/useUiStore';
+import { useCalendarStore } from '../../hooks/useCalendarStore';
 
 
 export const useModalForm = () => {
-
-    const [ isOpen, setIsOpen ] = useState(true)
     const [ formSubmitted, setFormSubmitted ] = useState(false)
 
+    const { closeDateModal } = useUiStore()
+    const { activeEvent } = useCalendarStore()
+
     const [formValues, setFormValues] = useState({
-        title: 'Merlina',
-        notes: 'Villecco',
+        title: '',
+        notes: '',
         start: new Date(),
         end: addHours( new Date(), 2 )
     })
     
+    useEffect(() => {
+        if ( activeEvent !== null ) {
+            setFormValues({ ...activeEvent })
+        }
+    }, [ activeEvent ])
+
 
     const onCloseModal = () => {
-        console.log('cerrando modal');
-        setIsOpen(false)
+        closeDateModal()
     }
 
     const onInputChange = ({ target }) => {
@@ -58,9 +66,11 @@ export const useModalForm = () => {
 
 
     return {
-        isOpen,
+        //* Propiedades
         formSubmitted,
         formValues,
+
+        //* Métodos 
         onCloseModal,
         onInputChange,
         onDateChange,
