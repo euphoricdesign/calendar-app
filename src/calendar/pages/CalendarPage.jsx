@@ -8,6 +8,7 @@ import { CalendarEvent, CalendarModal, FabAddNew, Navbar } from "../" // compone
 import { localizer, getMessagesES } from '../../helpers' // helpers
 import { useUiStore } from '../../hooks/useUiStore'
 import { useCalendarStore } from '../../hooks/useCalendarStore'
+import { FabDelete } from '../components/FabDelete'
 
 
 
@@ -45,7 +46,7 @@ export const CalendarPage = () => {
     }
 
     const onViewChanged = ( event ) => {
-        // localStorage.setItem('lastView', event)
+        localStorage.setItem('lastView', event)
     }
 
 
@@ -59,7 +60,7 @@ export const CalendarPage = () => {
                 events={ events }
                 defaultView={ lastView }
                 startAccessor="start"
-                endAccessor="end" // se utilizan para especificar los nombres de la propiedades en los objetos de eventos que representan la fecha de inicio y fin del evento.
+                endAccessor="end" // se utilizan para especificar los nombres de la propiedades que representan la fecha de inicio y fin del evento en los objetos de eventos.
                 style={{ height: 'calc( 100vh - 80px )' }}
                 messages={ getMessagesES() } // esto nos configura en español el resto del calendario (botones, mensajes)
                 eventPropGetter={ eventStyleGetter } // eventPropGetter es una función opcional que se utiliza para personalizar la apariencia y el estilo de los eventos en el calendario
@@ -74,6 +75,7 @@ export const CalendarPage = () => {
 
             <CalendarModal />
             <FabAddNew />
+            <FabDelete />
         </>
     )
 }

@@ -50,7 +50,7 @@ export const CalendarModal = () => {
             onRequestClose={ onCloseModal }
             style={ customStyles }
             className="modal"
-            overlayClassName="modal-fondo" // . La superposición es la capa oscura y transparente que se muestra detrás del componente Modal para enfocar la atención del usuario en el contenido del modal.
+            overlayClassName="modal-fondo" // La superposición es la capa oscura y transparente que se muestra detrás del componente Modal para enfocar la atención del usuario en el contenido del modal.
             closeTimeoutMS={ 200 }
         >
             <h1> Nuevo evento </h1>
@@ -93,9 +93,9 @@ export const CalendarModal = () => {
                         autoComplete="off"
                         name="title"
                         value={ formValues.title }
-                        onChange={onInputChange}
+                        onChange={ onInputChange }
                     />
-                    <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
+                    <small className="form-text text-muted">Una descripción corta</small>
                 </div>
 
                 <div className="form-group mb-2">
@@ -106,9 +106,9 @@ export const CalendarModal = () => {
                         rows="5"
                         name="notes"
                         value={ formValues.notes }
-                        onChange={onInputChange}
+                        onChange={ onInputChange }
                     />
-                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                    <small className="form-text text-muted">Información adicional</small>
                 </div>
 
                 <button

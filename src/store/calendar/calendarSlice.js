@@ -22,11 +22,30 @@ export const calendarSlice = createSlice({
 
     },
     reducers: {
-        changeActiveEvent: (state, action ) => {
-            state.activeEvent = action.payload
+        changeActiveEvent: (state, { payload }) => {
+            state.activeEvent = payload
         },
+        onAddNewEvent:  (state, { payload }) => {
+            state.events.push( payload )
+            state.activeEvent = null // limpio el evento activo y esto esta listo para esperar el siguiente evento 
+        },
+        onUpdateEvent:  (state, { payload }) => {
+             state.events = state.events.map(event => {
+                if ( event._id === payload._id ) {
+                    return payload
+                }
+
+                return event
+             })
+        },
+        onDeleteEvent: (state, { payload }) => {
+            if ( state.activeEvent ) {
+                state.events = state.events.filter(event => event._id !== payload._id)
+                state.activeEvent = null
+            }
+        }
     }
 });
 
 
-export const { changeActiveEvent } = calendarSlice.actions;
+export const { changeActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent } = calendarSlice.actions;

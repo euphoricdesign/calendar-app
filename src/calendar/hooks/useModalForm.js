@@ -12,7 +12,7 @@ export const useModalForm = () => {
     const [ formSubmitted, setFormSubmitted ] = useState(false)
 
     const { closeDateModal } = useUiStore()
-    const { activeEvent } = useCalendarStore()
+    const { activeEvent, startSavingEvent } = useCalendarStore()
 
     const [formValues, setFormValues] = useState({
         title: '',
@@ -48,19 +48,24 @@ export const useModalForm = () => {
         })
     }
 
-    const onSubmit = (event) => {
+    const onSubmit = async(event) => {
         event.preventDefault()
         setFormSubmitted(true)
 
+        
         const difference = differenceInSeconds( formValues.end, formValues.start ) // La función differenceInSeconds de date-fns se utiliza para calcular la diferencia en segundos entre dos fechas
-
+        
         if ( isNaN( difference ) || difference <= 0 ) { // isNaN es una función de js. Si no es un número o la diferencia es menor a 0, es decir la fecha final es menor 
             Swal.fire('Fechas incorrectas', 'Revisar fechas ingresadas', 'error')
             return
         }
+        
+        if ( formValues.title.length <= 0 ) return
 
-        if ( !formValues.title.length <= 0 ) return
-
+        //* TODO: 
+        await startSavingEvent( formValues ) 
+        closeDateModal()
+        setFormSubmitted(false)
 
     }
 
