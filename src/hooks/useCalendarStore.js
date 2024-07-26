@@ -31,7 +31,7 @@ export const useCalendarStore = () => {
         } else {
 
             //* Creando un evento
-            dispatch(onAddNewEvent( { ...calendarEvent, _id: new Date().getTime() } )) // Si es un evento nuevo a sabemos que no va a tener id, por lo que vamos a crearle un id ficticio por el momento 
+            dispatch(onAddNewEvent( { ...calendarEvent, _id: new Date().getTime() } )) // Si es un evento nuevo sabemos que no va a tener id, por lo que vamos a crearle un id ficticio por el momento 
 
         }
 

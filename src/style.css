@@ -1,62 +1,366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  font-family: "Outfit", sans-serif;
+  color: #353535;
+}
+
+button, input {
+  outline: none; 
+}
+  
+
 /* Modal */
 .ReactModalPortal > div{
-    opacity: 0;
+  opacity: 0;
 }
 
 .ReactModalPortal .ReactModal__Overlay {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    transition: opacity .2s ease-in-out;
-    z-index: 999;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: opacity .2s ease-in-out;
+  z-index: 999;
 }
 
 .modal-fondo {
-    background-color: rgba(0, 0, 0, 0.3);
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: fixed;
 }
 
 .ReactModalPortal .ReactModal__Overlay--after-open {
-    opacity: 1;
+  opacity: 1;
 }
 
 .ReactModalPortal .ReactModal__Overlay--before-close {
-    opacity: 0;
+  opacity: 0;
 }
 
 .modal {
-    background: white;
-    border-radius: 5px;
-    color: rgb(51, 51, 51);
-    display: inline;
-    max-height: 620px;
-    max-width: 500px;
-    outline: none;
-    padding: 10px;
+  background: white;
+  border-radius: 10px;
+  color: rgb(51, 51, 51);
+  display: inline;
+  max-height: 620px;
+  max-width: 500px;
+  outline: none;
+  padding: 10px;
 }
 
 /* FABS */
-
+/* 
 .fab {
-    border-radius: 100%;
-    bottom: 25px;
-    font-size: 20px;
-    padding: 15px;
-    position: fixed;
-    right: 25px;
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 20px;
+  padding: 15px;
+  position: fixed;
+  right: 25px;
+  z-index: 1000;
+} */
+.rbc-calendar {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rbc-label {
+  font-size: 13px;
+  color: #a1a1a1;
+}
+
+.rbc-time-view {
+  background: white;
+  padding: 0px 40px 40px 40px;
+  border: none;
+  border-radius: 10px;
+}
+
+.rbc-header {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rbc-header span {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.rbc-button-link {
+  font-weight: 300;
+}
+
+.navbar {
+  padding: 12px 100px;
+}
+
+.rbc-time-header-cell {
+  height: 60px;
+}
+
+.rbc-button-link span {
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .fab-danger {
-    border-radius: 100%;
-    bottom: 25px;
-    font-size: 20px;
-    /* padding: 15px; */
-    position: fixed;
-    left: 25px;
-    width: 50px;
-    height: 50px;
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 20px;
+  /* padding: 15px; */
+  position: fixed;
+  left: 25px;
+  width: 50px;
+  height: 50px;
+}
+
+/* TOOLBAR */
+
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  border-radius: 10px;
+  background: white;
+  width: 1024px;
+}
+
+.custom-toolbar .today {
+  background-color: #e6e6e6c0;
+  border: 1px solid #e6e6e6;
+  color: #333333cc;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  margin-right: 8px;
+}
+  
+.custom-toolbar button {
+  background-color: #ffffff;
+  border: none;
+  color: #333333cc;
+  padding: 5px ;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+  
+.custom-toolbar button.active {
+  background-color: rgb(247, 116, 33);
+  color: white;
+}
+
+.custom-toolbar .date-label {
+  font-weight: bold;
+  font-size: 1.6em;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.navigation-buttons,
+.view-buttons {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.select {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e6e6e6c0;
+  border: 1px solid #e6e6e6;
+  color: #333333cc;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.arrow {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.options {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 100;
+  margin-top: 5px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.options .option {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+
+  padding: 10px;
+  cursor: pointer;
+}
+
+.options .option:hover, .options .option.active {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.button-gradient {
+  background-color: #FAD961;
+  background-image: linear-gradient(180deg, #FAD961 0%, #d9534f 75%);
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.rbc-month-view {
+  background: white;
+  width: 1024px;
+  padding: 0px 40px 40px 40px;
+  border: none;
+  border-radius: 10px;
+}
+
+
+/* DatePickerStyles.css */
+.react-datepicker {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__header {
+  background-color: white;
+  border-bottom: 1px solid white;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.react-datepicker__day {
+  color: #333;
+}
+
+.react-datepicker__day--selected {
+  background-color: rgb(247, 116, 33) ;
+  color: white;
+}
+
+.react-datepicker__day--today {
+  border-bottom: 2px solid rgb(247, 116, 33) ;
+}
+
+.react-datepicker__day--weekend {
+  color: #d9534f;
+}
+
+.react-datepicker__month-container {
+  padding: 10px;
+}
+
+.react-datepicker__navigation {
+  top: 10px;
+  line-height: 1.7rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.react-datepicker__navigation--previous {
+  left: 10px;
+}
+
+.react-datepicker__navigation--next {
+  right: 10px;
+}
+
+.react-datepicker__navigation-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  display: inline-block;
+  padding: 0.3em;
+}
+
+/* Color para todos los días de la semana */
+.react-datepicker__day-name {
+  color: #999;
+}
+
+
+.rbc-off-range-bg {
+  background-color: white;  /* Color de fondo deseado para los días fuera de rango */
+  opacity: 0.5;  /* Opcional: Cambiar la opacidad para hacerlos más distintivos */
+}
+
+.rbc-date-cell {
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* Personaliza el scrollbar para la vista diaria y semanal en Chrome, Safari y Edge */
+.rbc-time-view .rbc-time-content, /* Vista diaria */
+.rbc-month-view .rbc-month-view, /* Vista mensual para asegurar estilo consistente */
+.rbc-week-view .rbc-time-content, /* Vista semanal */
+.rbc-day-view .rbc-time-content { /* Vista diaria */
+    overflow-y: scroll; /* Asegúrate de que haya un scrollbar visible */
+}
+
+/* Estilo para el scrollbar */
+.rbc-time-view .rbc-time-content::-webkit-scrollbar, 
+.rbc-week-view .rbc-time-content::-webkit-scrollbar,
+.rbc-day-view .rbc-time-content::-webkit-scrollbar {
+    width: 16px; /* Ancho del scrollbar */
+}
+
+.rbc-time-view .rbc-time-content::-webkit-scrollbar-track,
+.rbc-week-view .rbc-time-content::-webkit-scrollbar-track,
+.rbc-day-view .rbc-time-content::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Color del track (parte por donde se desplaza el thumb) */
+    border-radius: 10px; /* Radio del borde del track */
+}
+
+.rbc-time-view .rbc-time-content::-webkit-scrollbar-thumb,
+.rbc-week-view .rbc-time-content::-webkit-scrollbar-thumb,
+.rbc-day-view .rbc-time-content::-webkit-scrollbar-thumb {
+    background: #cfcfcf; /* Color del thumb (parte que se arrastra) */
+    border-radius: 10px; /* Radio del borde del thumb */
+}
+
+.rbc-time-view .rbc-time-content::-webkit-scrollbar-thumb:hover,
+.rbc-week-view .rbc-time-content::-webkit-scrollbar-thumb:hover,
+.rbc-day-view .rbc-time-content::-webkit-scrollbar-thumb:hover {
+    background: #a9a8a8; /* Color del thumb al pasar el cursor sobre él */
 }

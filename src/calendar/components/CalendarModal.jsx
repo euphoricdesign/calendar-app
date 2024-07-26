@@ -36,7 +36,7 @@ export const CalendarModal = () => {
         onInputChange,
         onDateChange,
         onSubmit
-    } = useModalForm() // custom hook
+    } = useModalForm() // custom hook para manejar el formulario del Modal 
 
     const titleClass = useMemo(() => {
         if ( !formSubmitted ) return ''

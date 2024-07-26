@@ -1,17 +1,13 @@
+import user from '../../../public/user.svg'
+
 export const Navbar = () => {
     return (
-        <div className="navbar navbar-dark bg-dark mb-4 px-4">
-            <span className="navbar-brand">
-                <i className="fas fa-calendar-alt"></i>
-                &nbsp;
-                Merlina
+        <div className="navbar shadow-sm">
+            <span className="navbar-brand" style={{fontWeight:'800', fontSize: '22px'}}>
+                Cal<span style={{color: '#f77421',fontWeight:'800', fontSize: '22px'}}>.</span>
             </span>
 
-            <button className="btn btn-outline-danger">
-                <i className="fas fa-sign-out-alt"></i>
-                &nbsp;
-                Salir
-            </button>
+            <img style={{width:'40px'}} src={user} alt='user' />
         </div>
     )
 }

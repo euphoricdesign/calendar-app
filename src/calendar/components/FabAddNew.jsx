@@ -26,8 +26,8 @@ export const FabAddNew = () => {
     }
 
     return (
-        <button onClick={handleNewEvent} className="btn btn-primary fab">
-            <i className="fas fa-plus"></i>
+        <button onClick={handleNewEvent} className="button-gradient">
+            <i className="fas fa-plus" style={{fontSize:'14px', color:'white'}}></i>
         </button>
     )
 }
