@@ -34,12 +34,19 @@ export const AppRouter = () => {
         <Routes>
             {
                 (status === 'not-authenticated')
-                ? <Route path="/auth/*" element={<LoginPage />} />
-                : <Route path="/*" element={<CalendarPage />} />
+                ? (
+                    <>
+                        <Route path="/auth/*" element={<LoginPage />} />
+                        <Route path="/*" element={<Navigate to="/auth/login" />} />
+                    </>
+                )
+                : (
+                    <>
+                        <Route path="/" element={<CalendarPage />} />
+                        <Route path="/*" element={<Navigate to="/" />} />
+                    </>
+                )
             }
-
-            {/* En teoria esto no sería necesario, pero lo vamos a dejar así para evitar que nuestro usuario llegue a una ruta que no existe */}
-            <Route path="/*" element={<Navigate to="/auth/login" />} />
         </Routes>
     )
 }
