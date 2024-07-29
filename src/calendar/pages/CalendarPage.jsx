@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Calendar } from 'react-big-calendar' 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import { CalendarEvent, CalendarModal, FabAddNew, Navbar, FabDelete } from "../" // componentes
+import { CalendarEvent, CalendarModal, Navbar, FabDelete } from "../" // componentes
 
 import { localizer, getMessagesES } from '../../helpers' // helpers
 
@@ -14,13 +14,16 @@ import { CustomToolbar } from '../components/CustomToolbar'
 import { dayPropGetter } from '../../helpers/dayPropGetter'
 import MiniCalendar from '../components/MiniCalendar'
 
+import { IoCalendarOutline } from "react-icons/io5";
+import TodayEventsComponent from '../components/TodayEvents'
+
 
 export const CalendarPage = () => {
 
     const { openDateModal } = useUiStore()
-    const { events, onChangeActiveEvent } = useCalendarStore()
+    const { events, onChangeActiveEvent, startLoadingEvents } = useCalendarStore()
 
-    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week' )
+    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month' )
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const eventStyleGetter = ( event, start, end, isSelected ) => { //* personalizar la apariencia y el estilo de los eventos en el calendario
@@ -50,6 +53,10 @@ export const CalendarPage = () => {
         localStorage.setItem('lastView', event)
     }
 
+    useEffect(() => {
+        startLoadingEvents()
+      }, [])
+
 
     return (
         <>
@@ -57,7 +64,16 @@ export const CalendarPage = () => {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', background: 'whitesmoke', padding: '40px 100px' }}>
                 
-                <MiniCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                <div>
+                    <MiniCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                    <div className='tw-rounded-[10px] tw-shadow-custom tw-bg-white tw-h-[260px] tw-p-[15px] tw-mt-[18px]'>
+                        <div className='tw-flex tw-items-center'>
+                            <IoCalendarOutline className='tw-text-orange-600' />
+                            <h2 className='tw-ml-[50px] tw-font-semibold'>Eventos de hoy</h2>
+                        </div>
+                        <TodayEventsComponent />
+                    </div>
+                </div>
            
 
                 <Calendar
@@ -81,6 +97,7 @@ export const CalendarPage = () => {
                 />
 
                 <CalendarModal />
+                <FabDelete />
             </div>
         </>
     )
