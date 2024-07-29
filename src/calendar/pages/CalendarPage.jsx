@@ -66,7 +66,7 @@ export const CalendarPage = () => {
                 
                 <div>
                     <MiniCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-                    <div className='tw-rounded-[10px] tw-shadow-custom tw-bg-white tw-h-[260px] tw-max-h-[260.85px] tw-p-[15px] tw-mt-[18px]'>
+                    <div className='tw-rounded-[10px] tw-shadow-custom tw-bg-white tw-w-[260.3px] tw-h-[260.85px] tw-p-[15px] tw-mt-[18px]'>
                         <div className='tw-flex tw-items-center'>
                             <IoCalendarOutline className='tw-text-orange-600' />
                             <h2 className='tw-ml-[50px] tw-font-semibold'>Eventos de hoy</h2>
