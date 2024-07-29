@@ -44,7 +44,7 @@ export const LoginPage = () => {
         <div className="container login-container">
             <div className="row">
                 <div className="col-md-6 login-form-1">
-                    <h3>Ingreso</h3>
+                    <h3 className='tw-text-2xl'>Ingreso</h3>
                     <form onSubmit={onLoginSubmit}>
                         <div className="form-group mb-2">
                             <input 
@@ -66,7 +66,7 @@ export const LoginPage = () => {
                                 onChange={ onLoginInputChange }
                             />
                         </div>
-                        <div className="d-grid gap-2 tw-flex tw-justify-center">
+                        <div className="d-grid gap-2 tw-flex tw-justify-center tw-mt-[18px]">
                             <input 
                                 type="submit"
                                 className="btnSubmit"
@@ -77,7 +77,7 @@ export const LoginPage = () => {
                 </div>
 
                 <div className="col-md-6 login-form-2">
-                    <h3>Registro</h3>
+                    <h3 className='tw-text-2xl'>Registro</h3>
                     <form onSubmit={onRegisterSubmit}>
                         <div className="form-group mb-2">
                             <input
@@ -110,7 +110,7 @@ export const LoginPage = () => {
                             />
                         </div>
 
-                        <div className="form-group mb-2" style={{'display': 'flex', 'justifyContent': 'center'}}>
+                        <div className="form-group tw-mt-[18px]" style={{'display': 'flex', 'justifyContent': 'center'}}>
                             <input 
                                 type="submit" 
                                 className="btnSubmit" 
