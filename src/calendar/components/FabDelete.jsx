@@ -1,6 +1,7 @@
 
 import { useCalendarStore } from "../../hooks/useCalendarStore"
 import { useUiStore } from "../../hooks/useUiStore"
+import { MdDeleteOutline } from "react-icons/md";
 
 export const FabDelete = () => {
 
@@ -15,12 +16,12 @@ export const FabDelete = () => {
     return (
         <button 
             onClick={ handleDelete } 
-            className="btn btn-danger fab-danger"
+            className="btn btn-danger fab-danger tw-flex tw-justify-center tw-items-center"
             style={{
                 display: hasEventSelected ? '' : 'none'
             }}
         >
-            <i className="fas fa-trash-alt"></i>
+            <MdDeleteOutline className="tw-text-center tw-text-[22px]" />
         </button>
     )
 }
