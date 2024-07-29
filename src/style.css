@@ -5,13 +5,17 @@
 
 body {
   font-family: "Outfit", sans-serif;
-  color: #353535;
+  color: #353535f5;
 }
 
-button, input {
+button:focus, input:focus {
   outline: none; 
 }
-  
+
+a:hover {
+  color: #333;
+  text-decoration: none;
+}
 
 /* Modal */
 .ReactModalPortal > div{
@@ -48,10 +52,22 @@ button, input {
   border-radius: 10px;
   color: rgb(51, 51, 51);
   display: inline;
-  max-height: 620px;
+  max-height: 544px;
   max-width: 500px;
   outline: none;
-  padding: 10px;
+  padding: 20px;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ffa980fc;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #ffa98091;
 }
 
 /* FABS */
@@ -609,3 +625,10 @@ button, input {
     opacity: 1.0;
   }
 }
+
+.right {
+  order: 1;
+  margin-right: 0;
+}
+
+
