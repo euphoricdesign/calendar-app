@@ -53,11 +53,10 @@ export const CalendarModal = () => {
             overlayClassName="modal-fondo" // La superposición es la capa oscura y transparente que se muestra detrás del componente Modal para enfocar la atención del usuario en el contenido del modal.
             closeTimeoutMS={ 200 }
         >
-            <h1> Nuevo evento </h1>
-            <hr />
-            <form className="container" onSubmit={ onSubmit }>
+            <h1 className='tw-text-[20px] tw-mb-[18px]'> Crea un nuevo evento </h1>
+            <form onSubmit={ onSubmit }>
                 <div className="form-group mb-2">
-                    <label>Fecha y hora inicio</label>
+                    <label className='tw-text-gray-500'>Fecha y hora inicio</label>
                     <DatePicker 
                         selected={ formValues.start } // la fecha seleccionada
                         onChange={ (event) => onDateChange(event, 'start') } //  el componente DatePicker no tiene un evento directo llamado onChange. en su lugar, utiliza el evento onChange estándar de React en combinación con la propiedad selected para capturar cambios en la selección de fecha.
@@ -70,7 +69,7 @@ export const CalendarModal = () => {
                 </div>
 
                 <div className="form-group mb-2">
-                    <label>Fecha y hora fin</label>
+                    <label className='tw-text-gray-500'>Fecha y hora fin</label>
                     <DatePicker 
                         minDate={ formValues.start } // no podría seleccionar una fecha que este antes de la fecha de inicio
                         selected={ formValues.end }
@@ -85,7 +84,7 @@ export const CalendarModal = () => {
 
                 <hr />
                 <div className="form-group mb-2">
-                    <label>Titulo y notas</label>
+                    <label className='tw-text-gray-500'>Titulo y notas</label>
                     <input 
                         type="text" 
                         className={`form-control ${ titleClass }`}
@@ -108,12 +107,11 @@ export const CalendarModal = () => {
                         value={ formValues.notes }
                         onChange={ onInputChange }
                     />
-                    <small className="form-text text-muted">Información adicional</small>
                 </div>
 
                 <button
                     type="submit"
-                    className="btn btn-outline-primary btn-block"
+                    className="btn tw-bg-orange-500 tw-text-white hover:tw-text-white tw-w-full tw-mt-[18px]"
                 >
                     <i className="far fa-save"></i>
                     <span> Guardar</span>
