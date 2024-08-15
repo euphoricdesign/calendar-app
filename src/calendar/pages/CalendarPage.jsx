@@ -5,7 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import { CalendarEvent, CalendarModal, Navbar, FabDelete } from "../" // componentes
 
-import { localizer, getMessagesES } from '../../helpers' // helpers
+import { localizer, getMessages } from '../../helpers' // helpers
 
 import { useUiStore } from '../../hooks/useUiStore'
 import { useCalendarStore } from '../../hooks/useCalendarStore'
@@ -58,18 +58,35 @@ export const CalendarPage = () => {
       }, [])
 
 
+      // Función personalizada para el formato de días
+const customFormats = {
+    dayFormat: (date, culture, localizer) => {
+      // Obtener la abreviatura del día
+      const weekdayShort = localizer.format(date, 'eee', culture);
+      // Obtener el ancho de la pantalla
+      const isSmallScreen = window.innerWidth < 600;
+      // Retornar la abreviatura modificada según el tamaño de pantalla
+      return isSmallScreen ? weekdayShort.charAt(0) : weekdayShort;
+    },
+    weekdayFormat: (date, culture, localizer) => {
+        const fullDay = localizer.format(date, 'EEEE', culture); // "Monday"
+        const shortDay = localizer.format(date, 'EEE', culture); // "Mon"
+        const isSmallScreen = window.innerWidth < 600;
+        return isSmallScreen ? shortDay.charAt(0) : shortDay;
+      },
+  };
+
     return (
         <>
             <Navbar />
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', background: 'whitesmoke', padding: '40px 100px' }}>
-                
-                <div>
+            
+            <div className='main-container tw-flex tw-justify-between mobile:tw-p-[20px] desktop:tw-py-[40px] desktop:tw-px-[100px] tw-gap-[5%]' style={{ background: 'whitesmoke' }}>
+                <div className='mobile:tw-hidden desktop:tw-block'>
                     <MiniCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                     <div className='tw-rounded-[10px] tw-shadow-custom tw-bg-white tw-w-[260.3px] tw-h-[260.85px] tw-p-[15px] tw-mt-[18px]'>
                         <div className='tw-flex tw-items-center'>
                             <IoCalendarOutline className='tw-text-orange-600' />
-                            <h2 className='tw-ml-[50px] tw-font-semibold'>Eventos de hoy</h2>
+                            <h2 className='tw-ml-[50px] tw-font-semibold'>Today's events</h2>
                         </div>
                         <TodayEventsComponent />
                     </div>
@@ -77,14 +94,14 @@ export const CalendarPage = () => {
            
 
                 <Calendar
-                    culture='es' // si queremos poner el calendario en español (días y meses) utilizamos esta propiedad, la misma va a buscar en el objeto 'locales' de nuestro localizer la propiedad 'es'
+                    culture='en' // si queremos poner el calendario en español (días y meses) utilizamos esta propiedad, la misma va a buscar en el objeto 'locales' de nuestro localizer la propiedad 'es'
                     localizer={ localizer }
                     events={ events }
                     defaultView={ lastView }
                     startAccessor="start"
                     endAccessor="end" // se utilizan para especificar los nombres de la propiedades que representan la fecha de inicio y fin del evento en los objetos de eventos.
                     style={{ height: 'calc(-147px + 100vh)', background:'#f5f5f5' }}
-                    messages={ getMessagesES() } // esto nos configura en español el resto del calendario (botones, mensajes)
+                    messages={ getMessages() } // esto nos configura en español el resto del calendario (botones, mensajes)
                     eventPropGetter={ eventStyleGetter } // eventPropGetter es una función opcional que se utiliza para personalizar la apariencia y el estilo de los eventos en el calendario
                     components={{
                         toolbar: CustomToolbar,
@@ -94,6 +111,7 @@ export const CalendarPage = () => {
                     onSelectEvent={ onSelect }
                     onView={ onViewChanged }
                     dayPropGetter={(date) => dayPropGetter(date, events)}  // Añade esta línea
+                    formats={customFormats}
                 />
 
                 <CalendarModal />

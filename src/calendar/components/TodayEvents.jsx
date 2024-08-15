@@ -17,7 +17,7 @@ const TodayEventsComponent = () => {
   return (
     <div className="tw-mt-[18px]">
       {todayEvents.length === 0 ? (
-        <p className='tw-text-center'>No hay eventos para hoy</p>
+        <p className='tw-text-center'>No events for today</p>
       ) : (
         <ul className='tw-text-xs'>
           {todayEvents.map(evento => (

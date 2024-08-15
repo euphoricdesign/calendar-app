@@ -56,7 +56,7 @@ export const useModalForm = () => {
         const difference = differenceInSeconds( formValues.end, formValues.start ) // La función differenceInSeconds de date-fns se utiliza para calcular la diferencia en segundos entre dos fechas
         
         if ( isNaN( difference ) || difference <= 0 ) { // isNaN es una función de js. Si no es un número o la diferencia es menor a 0, es decir la fecha final es menor 
-            Swal.fire('Fechas incorrectas', 'Revisar fechas ingresadas', 'error')
+            Swal.fire('Incorrect dates', 'Check dates entered', 'error')
             return
         }
         

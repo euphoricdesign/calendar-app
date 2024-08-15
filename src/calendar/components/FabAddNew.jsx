@@ -27,7 +27,7 @@ export const FabAddNew = () => {
 
     return (
         <button onClick={handleNewEvent} className="button-gradient">
-            <i className="fas fa-plus" style={{fontSize:'14px', color:'white'}}></i>
+            <i className="fas fa-plus mobile:tw-text-[12px] md:tw-text-[14px] tw-text-white"></i>
         </button>
     )
 }

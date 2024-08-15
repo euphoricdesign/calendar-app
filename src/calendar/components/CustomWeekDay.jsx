@@ -1,6 +1,6 @@
 import React from 'react';
 import { format, addDays } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { es, enUS } from 'date-fns/locale';
 
 const CustomWeekday = () => {
   const today = new Date();
@@ -8,7 +8,7 @@ const CustomWeekday = () => {
   
   const weekDays = [...Array(7)].map((_, i) => {
     const day = addDays(new Date(today.setDate(today.getDate() - today.getDay())), i);
-    const dayName = format(day, 'EEEEEE', { locale: es }).toUpperCase();
+    const dayName = format(day, 'EEEEEE', { locale: enUS }).toUpperCase();
     const isCurrentDay = i === currentDayIndex;
     
     return { dayName, isCurrentDay };

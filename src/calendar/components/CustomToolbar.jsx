@@ -40,9 +40,9 @@ export const CustomToolbar = (toolbar) => {
     const capitalizedMonth = capitalizeFirstLetter(month);
 
     return (
-      <div>
-        <span style={{ fontWeight: 700 }}>{capitalizedMonth}</span>{' '}
-        <span style={{ fontWeight: 300 }}>{year}</span>
+      <div className='mobile:tw-flex tw-justify-center desktop:tw-block'>
+        <span className='mobile:tw-text-[18px] desktop:tw-text-[1.6rem]' style={{ fontWeight: 700 }}>{capitalizedMonth}</span>{' '}
+        <span className='mobile:tw-text-[18px] desktop:tw-text-[1.6rem]' style={{ fontWeight: 300 }}>{year}</span>
       </div>
     );
   };
@@ -50,7 +50,7 @@ export const CustomToolbar = (toolbar) => {
   return (
     <div className="custom-toolbar">
       <div className="navigation-buttons">
-        <button className='today' onClick={goToCurrent}>Today</button>
+        <button className='today mobile:tw-hidden md:tw-block' onClick={goToCurrent}>Today</button>
         <button onClick={goToBack}><IoIosArrowBack /></button>
         <button onClick={goToNext}><IoIosArrowForward /></button>
         <div className="date-label">{label()}</div>
@@ -69,19 +69,19 @@ export const CustomToolbar = (toolbar) => {
                 className={`option ${selectedView === 'month' ? 'active' : ''}`} 
                 onClick={() => handleViewChange('month')}
               >
-                Mes
+                Month
               </div>
               <div 
                 className={`option ${selectedView === 'week' ? 'active' : ''}`} 
                 onClick={() => handleViewChange('week')}
               >
-                Semana
+                Week
               </div>
               <div 
                 className={`option ${selectedView === 'day' ? 'active' : ''}`} 
                 onClick={() => handleViewChange('day')}
               >
-                Día
+                Day
               </div>
             </div>
           )}
